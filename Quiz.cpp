@@ -31,16 +31,16 @@ void student(vector<string> q,vector<string> a,vector<string> b, vector<string> 
 	int count=0;
 	string text; 
 	ifstream find;
-	find.open("C:\\Users\\Pc\\OneDrive\\Desktop\\id_ans.txt");
+	find.open("StudentID_Ans.txt");
 	
 	while(getline(find,text))	if(text==id)	count++;
 	
 	if(count==0){
-		ofstream writeid1("C:\\Users\\Pc\\OneDrive\\Desktop\\id_ans.txt",ios::app);	//all student file
+		ofstream writeid1("StudentID_Ans.txt",ios::app);	//all student file
 		writeid1<<"\n"<<id;
 		
 		if(toUpperStr(stu_ans)==ans[numq]){
-			ofstream writeid2("C:\\Users\\Pc\\OneDrive\\Desktop\\id_correct.txt",ios::app);	//correct ans file
+			ofstream writeid2("StudentID_Ans_correct.txt",ios::app);	//correct ans file
 			writeid2<<"\n"<<id;
 		}
 	}
@@ -59,7 +59,7 @@ void librarian(vector<string> &q,vector<string> &a,vector<string> &b,vector<stri
         else if(command1 == "READSID"){
         	string sid; 
 			ifstream read;
-			read.open("C:\\Users\\Pc\\OneDrive\\Desktop\\id_correct.txt");
+			read.open("StudentID_Ans_correct.txt");
 			cout<< "---------------------------------\n";
 			while(getline(read,sid))	cout<<sid<<"\n";
 			cout<< "---------------------------------\n";
@@ -69,9 +69,9 @@ void librarian(vector<string> &q,vector<string> &a,vector<string> &b,vector<stri
 				cin>>delid;
 				delid=toUpperStr(delid);
 				if(delid=="YES"){
-					ofstream del1("C:\\Users\\Pc\\OneDrive\\Desktop\\id_ans.txt");
+					ofstream del1("StudentID_Ans.txt");
 					del1<<"";
-					ofstream del2("C:\\Users\\Pc\\OneDrive\\Desktop\\id_correct.txt");
+					ofstream del2("StudentID_Ans_correct.txt");
 					del2<<"";
 					cout<<"DELETED ALL STUDENT ID\n";
 					break;
@@ -231,7 +231,7 @@ int main(/*int argc,char *argv[]*/){
 	vector<string> qans;
 	
 	ifstream read;
-	read.open("C:\\Users\\Pc\\OneDrive\\Desktop\\q.txt");
+	read.open("Question.txt");
 	string textline;
     char format[] = "%[^:]:%[^:]:%[^:]:%[^:]:%[^:]:%s";
     
@@ -254,7 +254,7 @@ int main(/*int argc,char *argv[]*/){
 	else if(/*argv[1]=="librarian"*/tester=="librarian")	{
 		librarian(questions,choice_a,choice_b, choice_c, choice_d, qans);
 		
-		ofstream write("C:\\Users\\Pc\\OneDrive\\Desktop\\q.txt");;
+		ofstream write("Question.txt");;
 		for(int i=0;i<questions.size();i++){
 			write<<questions[i]<<":"<<choice_a[i]<<":"<<choice_b[i]<<":"<<choice_c[i]<<":"<<choice_d[i]<<":"<<qans[i]<<"\n";
 		} 
