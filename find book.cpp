@@ -9,8 +9,10 @@ using namespace std;
 
 int main()
 {
-    string need;
-    cout << "Welcome to your library\n";
+    cout << " /)/)\n";
+    cout << "( . .)\n";
+    cout << "( つ♡ Welcome to your library\n";
+
     cout << "What do you need to do\n";
     cout << "A - Search for book\n";
     cout << "B - Borrow books\n";
@@ -18,6 +20,7 @@ int main()
     cout << "D - Book a reading room\n";
     cout << "E - Do the quiz\n";
     cout << "You need to : \n";
+    string need;
     cin >> need;
 
     if(need == "A"){
@@ -33,25 +36,22 @@ int main()
         cout << "- Psychology         (H01-H49)\n";
         cout << "- Management         (J01-J55)\n";
         cout << "- Technollogy        (K01-K49)\n";
-        //cout << "type : ";
         
         while(true){
         cout << "\nWhat kind of books do you want to find?\n";
+
         string ans;
         cout << "Do you know the type of books? (Y/N) : \n";
         cin >> ans;
         cin.ignore();
 
-        if(ans == "N"){
+        if(ans == "N"){  //ไม่รู้ประเภทหนังสือรู้แต่ชื่อ
             cout << "What is the name of the desired book?\n";
             cout << "Name book : ";
             string book;
             getline(cin,book);  //รับชื่อหนัง
-            vector<string> B;            
-            while(getline(cin,book)){   //ทำให้ชื่อหนังสือเป็นตัวใหญ่ทั้งหมด
-                int i = 0;
-                B[i] = toupper(book[i]);
-                i++;
+            for(unsigned int i = 0;i < book.size(); i++){    //-----------------Edit-----------------------
+                book[i] = toupper(book[i]);// ทำให้ book เป็นตัวใหญ่หมด
             }
 
             ifstream source;
@@ -61,24 +61,27 @@ int main()
             while(getline(source,textline)){
                 A.push_back(textline); 
             }
+            source.close();//-----------------Edit-----------------------ปิดไฟล์ source ไม่งั้นมันจะไปซ้ำกับไฟล์ข้างล่าง
 
             //เปิดไฟล์เปล่า
             ofstream dest;
             dest.open ("found.txt");
             //หาชื่อหนังสือที่ผู็ใช้พิมมาในtxtแล้วเก็บไว้ในไฟล์เปล่า
-            int count;
+            int count = 0;//-----------------Edit----------------------- ให้รีเซ็ตทุกครั้งเวลาหาใหม่
             for(unsigned int i = 0; i < A.size(); i++){
                 int check = 0;
-                for(unsigned int j = 0; j < sizeof(B); j++){
-                    if(book[j] != A[i][j]){
+                for(unsigned int j = 0; j < book.size(); j++){  //-----------------Edit-----------------------
+                    if(book[j] != toupper(A[i][j])){//-----------------Edit----------------------- ทำให้เป็นตัวใหญ่
                         check = 1;
                         break;
                     }
                 }
                 if(check == 0){
+                    count++;    //-----------------Edit----------------------- นับจำนวนหนังสือที่เจอ
                     dest << A[i] << "\n";
                 }
             }
+            dest.close();//-----------------Edit-----------------------ปิดไฟล์ dest
 
             cout << "Number of volumes found : " << count <<endl;
             if (count == 0){
@@ -93,7 +96,7 @@ int main()
                     cout << textline <<'\n';
                     }
             source.close();
-            }          
+            } 
 
             //จบการค้นหา
             string ans;
@@ -122,21 +125,18 @@ int main()
         if(ans == "Y"){
 
             cout << "Book type            Code\n" <<endl;
-            cout << "1 - All of books       (001-506)\n";
-            cout << "2 - General            (A01-A50)\n";
-            cout << "3 - Science            (B01-B53)\n";
-            cout << "4 - Math               (C01-C33)\n";
-            cout << "5 - Novel              (D01-D69)\n";
-            cout << "6 - Documentary        (E01-E58)\n";
-            cout << "7 - Politics           (F01-F52)\n";
-            cout << "8 - Linguistics        (G01-G38)\n";
-            cout << "9 - Psychology         (H01-H49)\n";
+            cout << "1  - All of books       (001-506)\n";
+            cout << "2  - General            (A01-A50)\n";
+            cout << "3  - Science            (B01-B53)\n";
+            cout << "4  - Math               (C01-C33)\n";
+            cout << "5  - Novel              (D01-D69)\n";
+            cout << "6  - Documentary        (E01-E58)\n";
+            cout << "7  - Politics           (F01-F52)\n";
+            cout << "8  - Linguistics        (G01-G38)\n";
+            cout << "9  - Psychology         (H01-H49)\n";
             cout << "10 - Management         (J01-J55)\n";
-            cout << "11 - Technology        (K01-K49)\n";
-            cout << "Please enter your answer in number";
-            cout << "type : ";
+            cout << "11 - Technology         (K01-K49)\n";
             
-
             string ans;
             cout << "\nWould you like to see a list of books in this genre? (Y/N) : " <<endl;
             cin >> ans;
@@ -145,7 +145,9 @@ int main()
 
                 int type;
                 cout << "What kind of book do you want?\n";
-                cin >> type;    //ต้องทำเป็นcaseมั้ยสไลด์9
+                cout << "Please enter your answer in number\n";
+                cout << "type : ";
+                cin >> type;    
                 if(type == 1){
                         ifstream source;
                         source.open("All.txt");
@@ -246,17 +248,13 @@ int main()
                         cout << "------------- End of 1st file ---------------";
                         source.close();
                         }
-
                 }
            
                 //ถามว่าคุณต้องการดูหนังสือประเภทอื่นอีกหรือไม่
                 cout << "Would you like to see other types of book? (Y/N) : ";
                 cin >> ans;
 
-                    if(ans == "Y"){
-                        //ไปที่บรรทัดที่120
-                    }
-                //ถ้าเอาอีกก็เอาอีกถ้าไม่ก็ถามว่าคุณต้องการไปทำไรต่อยืมคืนหรือควิซบลาๆ
+                    if(ans == "Y") continue;
 
                     if(ans == "N"){
                         cout << "What do you need to do\n";
@@ -268,7 +266,7 @@ int main()
                         cout << "You need to : \n";
                         cin >> need;
 
-                        //if(need == 'X') หยุดทุกฟังก์ชัน;
+                        if(need == "X") break;
                     }
 
             }
@@ -277,24 +275,70 @@ int main()
                 
                 int type;
                 cout << "What kind of book do you want?\n";
+                cout << "Please enter your answer in number\n";
+                cout << "type : ";
                 cin >> type;
                 cin.ignore();
-                string Namebook;
-                cout << "The name of book you want to serch?\n";
-                cout << "Name : " <<endl;
-                getline(cin,Namebook);
+                cout << "What is the name of the desired book?\n";
+                cout << "Name book : ";
+                string book;
+                getline(cin,book);  //รับชื่อหนัง
+                for(unsigned int i = 0;i < book.size(); i++){    //-----------------Edit-----------------------
+                book[i] = toupper(book[i]);// ทำให้ book เป็นตัวใหญ่หมด
+            }
 
+            ifstream source;
+            source.open("All.txt"); //ไฟล์ที่ใช้หา
+            string textline;
+            vector<string> A;
+            while(getline(source,textline)){
+                A.push_back(textline); 
+            }
+            source.close();//-----------------Edit-----------------------ปิดไฟล์ source ไม่งั้นมันจะไปซ้ำกับไฟล์ข้างล่าง
+
+            //เปิดไฟล์เปล่า
+            ofstream dest;
+            dest.open ("found.txt");
+            //หาชื่อหนังสือที่ผู็ใช้พิมมาในtxtแล้วเก็บไว้ในไฟล์เปล่า
+            int count = 0;//-----------------Edit----------------------- ให้รีเซ็ตทุกครั้งเวลาหาใหม่
+            for(unsigned int i = 0; i < A.size(); i++){
+                int check = 0;
+                for(unsigned int j = 0; j < book.size(); j++){  //-----------------Edit-----------------------
+                    if(book[j] != toupper(A[i][j])){//-----------------Edit----------------------- ทำให้เป็นตัวใหญ่
+                        check = 1;
+                        break;
+                    }
+                }
+                if(check == 0){
+                    count++;    //-----------------Edit----------------------- นับจำนวนหนังสือที่เจอ
+                    dest << A[i] << "\n";
+                }
+            }
+            dest.close();//-----------------Edit-----------------------ปิดไฟล์ dest
+
+            cout << "Number of volumes found : " << count <<endl;
+            if (count == 0){
+                cout << "Not found";
+            }
+            
+            if(count > 0){ 
+                ifstream source;
+                source.open("found.txt");
+                string textline;
+                while (getline(source,textline)){
+                    cout << textline <<'\n';
+                    }
+            source.close();
+            }
                 //ค้นหาชื่อหนังสือในเฉพาะไทป์ที่เลือกให้ขึ้นตัวอักษรนำหน้าที่มีทกบรรทัดไม่ใช่ที่เจอแค่บรรทัดแรกแล้วหยุด
                 //ถ้ามีมีให้ขึ้นว่าคุรต้องการหนังสืออื่นอีกมั้ยแล้วกลับไปที่หน้าไทป์ หรือถามว่าต้องการไปฟังชันคืนยืมหรือไม้
                 //ถ้าไม่มีให้ขึ้นหาไม่เจออาจอยู่ในไทปือื่นหรือไม่มี
                 //ถามว่าคุณต้องการดูหนังสือประเภทอื่นอีกหรือไม่
+                //ถามว่าคุณต้องการดูหนังสือประเภทอื่นอีกหรือไม่
                 cout << "Would you like to see other types of book? (Y/N) : ";
                 cin >> ans;
 
-                    if(ans == "Y"){
-                        //ไปที่บรรทัดที่120
-                    }
-                //ถ้าเอาอีกก็เอาอีกถ้าไม่ก็ถามว่าคุณต้องการไปทำไรต่อยืมคืนหรือควิซบลาๆ
+                    if(ans == "Y") continue;
 
                     if(ans == "N"){
                         cout << "What do you need to do\n";
@@ -306,7 +350,7 @@ int main()
                         cout << "You need to : \n";
                         cin >> need;
 
-                        //if(need == 'X') หยุดทุกฟังก์ชัน;
+                        if(need == "X") break;
                     }
 
                 //ถ้าต้องการหาหนังสืออีกให้กลับไปหน้าไทป์
