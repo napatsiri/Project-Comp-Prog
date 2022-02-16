@@ -55,8 +55,9 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){
 
 }   
 
-void pikachu(vector<string> &book,vector<string> &borrowed){
+void pikachu(vector<string> &book,vector<string> &borrowed,int &id){
     string ans;
+    bool k=true;
     cout << "Before we start do you know the name of book which you desired?(Yes/No): ";
     do{
         getAns(ans);
@@ -78,10 +79,11 @@ void pikachu(vector<string> &book,vector<string> &borrowed){
                     cout <<  "Thank you for using us.^_^\n";
                     cout << setw(20) <<"Adios\n";            
                     cout << "---------------------------------\n";
+                    k=false;
                     break;
                 } 
             }while(true);
-            break;
+            
         }else if(ans=="NO"){
             //เว้นไว้ใส่ฟังก์ชั่นหาหนังสือ
             break;
@@ -91,10 +93,21 @@ void pikachu(vector<string> &book,vector<string> &borrowed){
             cout << "---------------------------------\n";
             cout << "Before we start do you know the name of book which you desired?(Yes/No): ";
         }
-    }while(true);
+    }while(k);
 
-    
+    ofstream dest("pass.txt");
+    for(int i=0;i<borrowed.size();i++){
+        dest << id << ": " << borrowed[i] << "\n" ;
+    } 
+    dest.close();
+}
 
+void showBorrowed(string butterfly){
+    ifstream source(butterfly);
+    string text;
+    while(getline(source,text)){
+        cout << text << "\n";
+    }
 }
 
 
@@ -108,25 +121,14 @@ int main()
     string butterfly = "pass.txt";
     vector<string> book,borrowed ;//ตัวแปรหนังสือกับหนังสือที่ถูกยืม
     importDataFromFile(filename,book);
-    pika(book,borrowed);
-    ofstream dest("pass.txt");
-    for(int i=0;i<borrowed.size();i++){
-        dest << id << ":" << borrowed[i] << "\n" ;
-    }
-    
+    pikachu(book,borrowed,id);
 
-    dest.close();
     string o;
     cout << "enter key: ";
     cin >> o;
-    if(o == "y"){
-        ifstream source(butterfly);
-        string text;
-        while(getline(source,text)){
-            cout << text << "\n";
-        }
+    if(o == "Yes"){
+        showBorrowed(butterfly);
     }
-    
     
     return 0;
 }
