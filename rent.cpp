@@ -83,7 +83,7 @@ void pikachu(vector<string> &book,vector<string> &borrowed){
             }while(true);
             break;
         }else if(ans=="NO"){
-            //ใส่ฟังก์ชั่นหาหนังสือ
+            //เว้นไว้ใส่ฟังก์ชั่นหาหนังสือ
             break;
         }else{
             cout << "---------------------------------\n";
