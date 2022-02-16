@@ -55,7 +55,7 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){
 
 }   
 
-void pika(vector<string> &book,vector<string> &borrowed){
+void pikachu(vector<string> &book,vector<string> &borrowed){
     string ans;
     cout << "Before we start do you know the name of book which you desired?(Yes/No): ";
     do{
