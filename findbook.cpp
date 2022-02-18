@@ -180,11 +180,11 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "\n------------- End of Language file ---------------";
+                        cout << "\n------------- End of Linguistics file ---------------";
                         source.close();
                 }else if(type == 9){
                         ifstream source;
-                        source.open("Psychology.txt");
+                        source.open("Phychology.txt");
                         string textline;
                         while (getline(source,textline)){
                             cout << textline <<'\n';
@@ -302,7 +302,7 @@ void findintype(){
             source.close();    
             }else if(type == 9){
                 ifstream source;
-                source.open("Psycology.txt"); //ไฟล์ที่ใช้หา
+                source.open("Phycology.txt"); //ไฟล์ที่ใช้หา
                 string textline;
                 while(getline(source,textline)){
                 A.push_back(textline); 
