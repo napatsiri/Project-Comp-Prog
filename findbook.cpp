@@ -215,7 +215,7 @@ void list(){
                     cout << "Please try again and enter the numbers (1-11)\n";
                 }
             cout << "\n";
-}//จบการดูรายชื่อหนังสือ 
+}//จบการดูรายชื่อหนังสือ  
 
 void namebook(){
     cout << "\nWhat is the name of the desired book?\n";
