@@ -16,17 +16,19 @@ void start(){
     cout << " /)/)\n";
     cout << "( . .)\n";
     cout << "(  Welcome to your library\n";
+    cin.get();
 }
 
 void func(){
-    cout << "///////////////////////////////\n";
-    cout << "/    What do you need to do   /\n";
-    cout << "/    A - Search for book      /\n";
-    cout << "/    B - Borrow books         /\n";
-    cout << "/    C - Return books         /\n";
-    cout << "/    D - Book a reading room  /\n";
-    cout << "/    E - Do the quiz          /\n";
-    cout << "///////////////////////////////\n";
+    cout << "   " << "///////////////////////////////\n";
+    cout << "   " <<  "/    What do you need to do   /\n";
+    cout << "   " <<  "/    1 - Search for book      /\n";
+    cout << "   " <<  "/    2 - Borrow books         /\n";
+    cout << "   " <<  "/    3 - Book a reading room  /\n";
+    cout << "   " <<  "/    4 - Do the quiz          /\n";
+    cout << "   " <<  "/    5 - Back to main         /\n";
+    cout << "   " <<  "/    6 - Exit                 /\n";
+    cout << "   " <<  "///////////////////////////////\n\n";
 }
 
 void booktype(){
@@ -54,6 +56,7 @@ void exit(){
     cout << "3 - Search for book in each genre.\n";
     cout << "4 - Exit\n";
     cout << ": ";
+    cout << "\n";
 }
 
 void inall(){
@@ -215,7 +218,7 @@ void list(){
                     cout << "Please try again and enter the numbers (1-11)\n";
                 }
             cout << "\n";
-}//จบการดูรายชื่อหนังสือ  
+}//จบการดูรายชื่อหนังสือ 
 
 void namebook(){
     cout << "\nWhat is the name of the desired book?\n";
@@ -353,25 +356,12 @@ void nametype(){
     }
 }
 
-int main()
-{
-    start();
-    cout << "\n";
-    func();
-    cout << "\n";
-    
-    string need;
-    cout << "You need to : ";
-    cin >> need;
-    cout << "---------------------------------\n";
+void find(){
+    int choice;
+    exit();
+    cin >> choice;
 
-    if(need == "A"){
-        
-        int choice;
-        exit();
-        cin >> choice;
-
-        do{
+    do{
         
         switch(choice){
         case 1:{ 
@@ -416,8 +406,6 @@ int main()
             exit();
             cin >> choice;
         }
-        }while (choice != 4);
-        
-    }
+    }while (choice != 4);
 
 }                   
