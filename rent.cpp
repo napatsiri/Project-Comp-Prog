@@ -7,12 +7,22 @@
 using namespace std;
 
 int aidee;
-vector<string> book,borrowed,a,b,c,d,e,f,g,h,i,j,codes ;//ตัวแปรสำคัญๆ
+vector<string> book,borrowed,a,b,c,d,e,f,g,h,i,j,codes,oldbook ;//ตัวแปรสำคัญๆ
 
 string toUpperStrX(string x){
     string y = x;
     for(unsigned i = 0; i < x.size();i++) y[i] = toupper(x[i]);
     return y;
+}
+
+void old_book(vector<string> &oldbook){
+    ifstream source;
+    source.open("pass.txt");
+    string text;
+    while(getline(source,text)){
+        oldbook.push_back(text);
+        
+    } 
 }
 
 void allbook(vector<string> &book){
@@ -246,11 +256,15 @@ vector<string> getCodes(vector<string> &book,vector<string> &borrowed,vector<str
     return codes;
 }
 
-void pass(vector<string> &borrowed,vector<string> &codes,int id){//ส่งข้อมูลเข้าไฟล์pass.txt
+void pass(vector<string> &borrowed,vector<string> &codes,vector<string> &oldbook,int id){//ส่งข้อมูลเข้าไฟล์pass.txt
     ofstream dest("pass.txt");
-        for(int i=0;i<borrowed.size();i++){
+
+    for(int j=0;j<oldbook.size();j++){
+        dest << oldbook[j] << "\n";
+    }
+    for(int i=0;i<borrowed.size();i++){
             dest << id << ": " << borrowed[i] << "," << codes[i] << "\n" ;
-        } 
+    } 
     dest.close();
 }
 
@@ -266,6 +280,7 @@ void showBorrowed(){
 
 int main()
 {
+    old_book(oldbook);
     allbook(book);
     general(a);
     science(b);
@@ -277,13 +292,14 @@ int main()
     psycho(h);
     manage(i);
     techno(j);
-    
     pikachu(book,borrowed,aidee);
    
     codes = getCodes(book,borrowed,a,b,c,d,e,f,g,h,i,j);
 
+
+
  
-    pass(borrowed,codes,aidee);
+    pass(borrowed,codes,oldbook,aidee);
   
     string o; //ใช้ฟังชั่นเรียกดูในไฟล์หนังสือที่ถูกยืมไป
     cout << "enter key: ";
