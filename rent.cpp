@@ -142,8 +142,8 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ด�
         if(toUpperStrX(key) == book[i]){
             k =true;
             if(k == true){
-                cout << "............................................................................\n";
-                cout << " This is your " << book[i] << " Good Luck Have Fun.\n";
+                cout << "............................................................................\n\n";
+                cout << " This is your " << book[i] << " Good Luck Have Fun.\n\n";
                 cout << "............................................................................\n";
                 borrowed.push_back(book[i]);
                 
@@ -151,8 +151,8 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ด�
         }
     }
     if(k==false){
-        cout << "............................................................................\n";
-        cout << "                            Cannot found.\n";
+        cout << "............................................................................\n\n";
+        cout << "                            Cannot found.\n\n";
         cout << "............................................................................\n";
     }
 
@@ -176,26 +176,28 @@ void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค
                 
                 cin.ignore();
                 if(ans=="NO"){
-                    cout << "............................................................................\n";
-                    cout << "This are "<< borrowed.size() << " books which you wanna borrowing\n";
+                    cout << "............................................................................\n\n";
+                    cout << "\t\tThis are "<< borrowed.size() << " books which you wanna borrowing\n";
                     for(int i=0;i<borrowed.size();i++){
                         cout << setw(39) << borrowed[i]  <<"\n";
                     }
                     cout << "                   Please return those book in due dates.\n";
                     cout << "                       Thank you for using us.^_^\n";
-                    cout << "                                 Adios\n";            
-                    cout << "............................................................................\n";
+                    cout << "                                 Adios\n\n";            
+                    cout << "............................................................................\n\n";
                     k=false;
                     break;
                 } 
             }while(true);
             break;
         }else if(ans=="NO"){
-            cout << "                   You must \"SEACH BOOKS\" before borrow.\n";
+            cout << "............................................................................\n\n";
+            cout << "                   You must \"SEACH BOOKS\" before borrow.\n\n";
+            cout << "............................................................................\n\n";
             break;
         }else{
-            cout << "............................................................................\n";
-            cout << "                           Invalid command.\n";
+            cout << "............................................................................\n\n";
+            cout << "                           Invalid command.\n\n";
             cout << "............................................................................\n";
             cout << "Before we start do you know the name of book which you desired?(Yes/No): ";
         }
@@ -271,10 +273,33 @@ void pass(vector<string> &borrowed,vector<string> &codes,vector<string> &oldbook
 void showBorrowed(){
     ifstream source("pass.txt");
     string text;
-    while(getline(source,text)){
-        cout << text << "\n";
-    }
+    
+    do{
+        cout << "Enter key to see all borrowed books";
+        getAns(text);
+        if(text=="YES"){
+            cout << "\n............................................................................\n\n";
+            while(getline(source,text)){
+                cout << text << "\n";
+            }
+            cout << "\n............................................................................\n";
+            break;
+        }else if(text == "NO"){
+            cout << "............................................................................\n\n";
+            cout << "OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK\n\n";
+            cout << "............................................................................\n";
+            break;
+        }else{
+            cout << "............................................................................\n\n";
+            cout << "INVALID COMMANND\n\n";
+            cout << "............................................................................\n";
+
+        }
+    }while(true);
 }
+    
+    
+    
 
 
 
@@ -295,18 +320,9 @@ int main()
     pikachu(book,borrowed,aidee);
    
     codes = getCodes(book,borrowed,a,b,c,d,e,f,g,h,i,j);
-
-
-
- 
     pass(borrowed,codes,oldbook,aidee);
-  
-    string o; //ใช้ฟังชั่นเรียกดูในไฟล์หนังสือที่ถูกยืมไป
-    cout << "enter key: ";
-    cin >> o;
-    if(o == "yes"){
-        showBorrowed();
-    }
+    showBorrowed();
+   
     
     return 0;
 }
