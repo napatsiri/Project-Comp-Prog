@@ -7,7 +7,6 @@
 #include <cstddef>
 using namespace std;
 
-string need;
 string ans;
 string book;
 vector<string> A;
@@ -17,19 +16,23 @@ void start(){
     cout << " /)/)\n";
     cout << "( . .)\n";
     cout << "(  Welcome to your library\n";
+    cin.get();
 }
 
 void func(){
-    cout << "What do you need to do\n";
-    cout << "A - Search for book\n";
-    cout << "B - Borrow books\n";
-    cout << "C - Return books\n";
-    cout << "D - Book a reading room\n";
-    cout << "E - Do the quiz\n";
+    cout << "   " << "///////////////////////////////\n";
+    cout << "   " <<  "/    What do you need to do   /\n";
+    cout << "   " <<  "/    1 - Search for book      /\n";
+    cout << "   " <<  "/    2 - Borrow books         /\n";
+    cout << "   " <<  "/    3 - Book a reading room  /\n";
+    cout << "   " <<  "/    4 - Do the quiz          /\n";
+    cout << "   " <<  "/    5 - Back to main         /\n";
+    cout << "   " <<  "/    6 - Exit                 /\n";
+    cout << "   " <<  "///////////////////////////////\n\n";
 }
 
 void booktype(){
-    cout << "Book type                Code\n" <<endl;
+    cout << "\nBook type               Code\n";
 
     cout << "1  - All of books       (001-506)\n";
     cout << "2  - General            (A01-A50)\n";
@@ -41,8 +44,29 @@ void booktype(){
     cout << "8  - Linguistics        (G01-G38)\n";
     cout << "9  - Psychology         (H01-H49)\n";
     cout << "10 - Management         (J01-J55)\n";
-    cout << "11 - Technology         (K01-K49)\n";
-    cout << "♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡";
+    cout << "11 - Technology         (K01-K49)\n" << "\n";
+
+}
+
+void exit(){
+    cout << "\nWhich one would you like to continue?\n";
+    cout << "Please enter numbers (1-4)\n";
+    cout << "1 - Search for books\n";
+    cout << "2 - Search for a list of books in each genre.\n";
+    cout << "3 - Search for book in each genre.\n";
+    cout << "4 - Exit\n";
+    cout << ": ";
+    cout << "\n";
+}
+
+void inall(){
+    ifstream source;
+            source.open("All.txt"); //ไฟล์ที่ใช้หา
+            string textline;
+            while(getline(source,textline)){
+                A.push_back(textline); 
+            }
+            source.close();//ปิดไฟล์ source ไม่งั้นมันจะไปซ้ำกับไฟล์ข้างล่าง
 }
 
 void seach(){
@@ -65,9 +89,10 @@ void seach(){
     }
     dest.close();//ปิดไฟล์ dest
 
-    cout << "Number of volumes found : " << count <<endl;
+    cout << "\nNumber of volumes found : " << count << "\n" <<endl;
     if (count == 0){
         cout << "Not found";
+        cout << "...................................\n";
     }
             
     if(count > 0){ 
@@ -78,12 +103,13 @@ void seach(){
             cout << textline <<'\n';
             }
     source.close();//จบการค้นหา
+    cout << ".......................................\n";
     } 
 }
 
 void list(){
                 cout << "What kind of book do you want?\n";
-                cout << "Please enter your answer in number\n";
+                cout << "Please enter your answer in numbers (1-11)\n";
                 cout << "type : ";
                 cin >> type;  
                 cout << endl;
@@ -94,7 +120,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of All file ---------------";
                         source.close();
                 }else if(type == 2){
                         ifstream source;
@@ -103,7 +129,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of General file ---------------";
                         source.close();
                 }else if(type == 3){
                         ifstream source;
@@ -112,7 +138,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Science file ---------------";
                         source.close();
                 }else if(type == 4){
                         ifstream source;
@@ -121,7 +147,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Math file ---------------";
                         source.close();
                 }else if(type == 5){
                         ifstream source;
@@ -130,7 +156,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Novel file ---------------";
                         source.close();
                 }else if(type == 6){
                         ifstream source;
@@ -139,7 +165,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Documrntary file ---------------";
                         source.close();
                 }else if(type == 7){
                         ifstream source;
@@ -148,7 +174,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Politics file ---------------";
                         source.close();
                 }else if(type == 8){
                         ifstream source;
@@ -157,16 +183,16 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Linguistics file ---------------";
                         source.close();
                 }else if(type == 9){
                         ifstream source;
-                        source.open("Psychology.txt");
+                        source.open("Phychology.txt");
                         string textline;
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Psychology file ---------------";
                         source.close();
                 }else if(type == 10){
                         ifstream source;
@@ -175,7 +201,7 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Management file ---------------";
                         source.close();
                 }else if(type == 11){
                         ifstream source;
@@ -184,13 +210,18 @@ void list(){
                         while (getline(source,textline)){
                             cout << textline <<'\n';
                         }
-                        cout << "------------- End of 1st file ---------------";
+                        cout << "\n------------- End of Technology file ---------------";
                         source.close();
                         }
-}//จบการดูรายชื่อนังสือ  
+                else{
+                    cout << "SORRY, SOMETHING WENT WRONG\n";
+                    cout << "Please try again and enter the numbers (1-11)\n";
+                }
+            cout << "\n";
+}//จบการดูรายชื่อหนังสือ 
 
 void namebook(){
-    cout << "What is the name of the desired book?\n";
+    cout << "\nWhat is the name of the desired book?\n";
     cout << "Name book : ";
     cin.ignore();
     getline(cin,book);  //รับชื่อหนัง
@@ -274,7 +305,7 @@ void findintype(){
             source.close();    
             }else if(type == 9){
                 ifstream source;
-                source.open("Psycology.txt"); //ไฟล์ที่ใช้หา
+                source.open("Phycology.txt"); //ไฟล์ที่ใช้หา
                 string textline;
                 while(getline(source,textline)){
                 A.push_back(textline); 
@@ -299,89 +330,82 @@ void findintype(){
             }
 }
 
-int main()
-{
-    start();
-    cout << "\n";
-    func();
-    cout << "\n";
-    cout << "You need to : ";
-    cin >> need;
+void nametype(){
+    if(type == 1){
+        cout << "\nType is all book";
+    }else if(type == 2){
+        cout << "\nType is General book";
+    }else if(type == 3){
+        cout << "\nType is Science book";
+    }else if(type == 4){
+        cout << "\nType is Math book";
+    }else if(type == 5){
+        cout << "\nType is Novel book";
+    }else if(type == 6){
+        cout << "\nType is Documentary book";
+    }else if(type == 7){
+        cout << "\nType is Politics book";
+    }else if(type == 8){
+        cout << "\nType is Linguistics book";
+    }else if(type == 9){
+        cout << "\nType is Psychology book";
+    }else if(type == 10){
+        cout << "\nType is Management book";
+    }else if(type == 11){
+        cout << "\nType is Technology book";
+    }
+}
 
-    if(need == "A"){
+void find(){
+    int choice;
+    exit();
+    cin >> choice;
+
+    do{
         
-        cout << "\n" << "\n";
-        booktype();
-
-        cout << "\nWhat kind of books do you want to find?\n";
-        cout << "Do you know the type of books? (Y/N) : ";
-        cin >> ans;
-        cin.ignore();
-        cout << "\n";
-
-        if(ans == "N"){  //ไม่รู้ประเภทหนังสือรู้แต่ชื่อ
+        switch(choice){
+        case 1:{ 
             
+            cout << ".................................\n";
             namebook();
-
-            ifstream source;
-            source.open("All.txt"); //ไฟล์ที่ใช้หา
-            string textline;
-            while(getline(source,textline)){
-                A.push_back(textline); 
-            }
-            source.close();//ปิดไฟล์ source ไม่งั้นมันจะไปซ้ำกับไฟล์ข้างล่าง
-
+            inall();
             seach();
-            
-            //ถามว่าคุณต้องการดูหนังสือประเภทอื่นอีกหรือไม่ void exit();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-        }//จบการค้นหาในAll
-        
-        if(ans == "Y"){
+            exit();
+            cin >> choice;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+            break;
+        }
+        case 2:{ //ดูรายชื่อ
 
+            cout << ".................................\n";
             booktype();
+            list();
+            exit();
+            cin >> choice;
+            break;
+        }
+        case 3:{ //ดูชื่อในไทป์
 
-            cout << "\nWould you like to see a list of books in this genre? (Y/N) : ";
-            cin >> ans;
-
-            if(ans == "Y"){
-
-                list();
-                //ถามว่าคุณต้องการดูหนังสือประเภทอื่นอีกหรือไม่ void exit();
-            }
-
-            if(ans == "N"){
-        
+            cout << ".................................\n";
+            booktype();
             namebook();
+            cout << "\n";
             puttype();
             findintype();
+            nametype();
             seach();
-            }
+            exit();
+            cin >> choice;
+            break;
+        }   
+        case 4:{
+            cout << ".................................\n";
+            cout << "\nHave fun with the book your find\n";
+            exit(0);
         }
-    }
+        default:
+            exit();
+            cin >> choice;
+        }
+    }while (choice != 4);
 
-    return 0;
 }                   
-
-            
-        
-        
-    
-
-//ใดๆควรทำประวัติการค้นหา
-                //else
-                //cout << "Please answer according to the options./n";
-                //แล้วก็วนลูปไปถามว่า "Would you like to see a list of books in this genre? (Y/N) : " <<endl;
-
-//void exit(){
-    //cout << "Would you like to see other types of book? (Y/N) : ";
-    //cin >> ans;
-
-        //if(ans == "Y") //continue;
-
-        //if(ans == "N"){
-           // func();
-           // cout << "You need to : \n";
-            //cin >> need;
-
-            //if(need == "X") break;
-//}
