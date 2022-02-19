@@ -7,7 +7,7 @@
 using namespace std;
 
 int aidee;
-vector<string> book,borrowed,a,b,c,d,e,f,g,h,i,j,codes ;//ตัวแปรสำคัญๆ
+vector<string> gbook,borrowed,a,b,c,d,e,f,g,h,i,j,codes ;//ตัวแปรสำคัญๆ
 
 string toUpperStrX(string x){
     string y = x;
@@ -15,12 +15,12 @@ string toUpperStrX(string x){
     return y;
 }
 
-void allbook(vector<string> &book){
+void allbook(vector<string> &gbook){
     ifstream source;
     source.open("All.txt");
     string text;
     while(getline(source,text)){
-        book.push_back(text);
+        gbook.push_back(text);
         
     } 
 }
@@ -122,20 +122,20 @@ void getAns(string &ans){
 }
 
 
-void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ดยืมหนังสือ ไว้ใส่ในปิกาจู
-    int N=book.size();
+void borrowBook(vector<string> &gbook,vector<string> &borrowed){ //โค้ดยืมหนังสือ ไว้ใส่ในปิกาจู
+    int N=gbook.size();
     bool k=false;
     string key,i;
     cout << "Please enter book's name: ";
     getline(cin,key);
     for(int i=0;i<N;i++){
-        if(toUpperStrX(key) == book[i]){
+        if(toUpperStrX(key) == gbook[i]){
             k =true;
             if(k == true){
                 cout << "............................................................................\n";
-                cout << " This is your " << book[i] << " Good Luck Have Fun.\n";
+                cout << " This is your " << gbook[i] << " Good Luck Have Fun.\n";
                 cout << "............................................................................\n";
-                borrowed.push_back(book[i]);
+                borrowed.push_back(gbook[i]);
                 
             }
         }
@@ -149,7 +149,7 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ด�
 }   
 
 
-void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค้ดตัวหลัก
+void pikachu(vector<string> &gbook,vector<string> &borrowed,int &aidee){ //โค้ดตัวหลัก
     string ans;
     bool k=true;
     cout << "Please enter your id: ";
@@ -160,7 +160,7 @@ void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค
         cin.ignore();
         if(ans=="YES"){
             do{
-                borrowBook(book,borrowed);
+                borrowBook(gbook,borrowed);
                 cout << "Do you want to borrow any?(Key No to exit,Key any to continue): ";    
                 getAns(ans);
                 
@@ -194,7 +194,7 @@ void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค
     
 }
 
-vector<string> getCodes(vector<string> &book,vector<string> &borrowed,vector<string> &a,vector<string> &b,vector<string> &c,vector<string> &d,vector<string> &e
+vector<string> getCodes(vector<string> &gbook,vector<string> &borrowed,vector<string> &a,vector<string> &b,vector<string> &c,vector<string> &d,vector<string> &e
         ,vector<string> &f,vector<string> &g,vector<string> &h,vector<string> &i,vector<string> &j){//โค้ดรับค่ารหัสหนังสือ
     string x;
     vector<string> codes;
@@ -266,7 +266,7 @@ void showBorrowed(){
 
 void rent()
 {
-    allbook(book);
+    allbook(gbook);
     general(a);
     science(b);
     math(c);
@@ -278,19 +278,16 @@ void rent()
     manage(i);
     techno(j);
     
-    pikachu(book,borrowed,aidee);
+    pikachu(gbook,borrowed,aidee);
    
-    codes = getCodes(book,borrowed,a,b,c,d,e,f,g,h,i,j);
+    codes = getCodes(gbook,borrowed,a,b,c,d,e,f,g,h,i,j);
 
  
     pass(borrowed,codes,aidee);
   
-    string o; //ใช้ฟังชั่นเรียกดูในไฟล์หนังสือที่ถูกยืมไป
-    cout << "enter key: ";
-    cin >> o;
-    if(o == "yes"){
+    
         showBorrowed();
-    }
+  
     
     
 }
