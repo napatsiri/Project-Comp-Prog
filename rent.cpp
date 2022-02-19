@@ -9,7 +9,7 @@ using namespace std;
 int aidee;
 vector<string> book,borrowed,a,b,c,d,e,f,g,h,i,j,codes ;//ตัวแปรสำคัญๆ
 
-string toUpperStr(string x){
+string toUpperStrX(string x){
     string y = x;
     for(unsigned i = 0; i < x.size();i++) y[i] = toupper(x[i]);
     return y;
@@ -118,7 +118,7 @@ void techno(vector<string> &j){
 
 void getAns(string &ans){
     cin >> ans;
-    ans=toUpperStr(ans);
+    ans=toUpperStrX(ans);
 }
 
 
@@ -129,7 +129,7 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ด�
     cout << "Please enter book's name: ";
     getline(cin,key);
     for(int i=0;i<N;i++){
-        if(toUpperStr(key) == book[i]){
+        if(toUpperStrX(key) == book[i]){
             k =true;
             if(k == true){
                 cout << "............................................................................\n";
@@ -266,9 +266,6 @@ void showBorrowed(){
 
 int main()
 {
-
-    
-    
     allbook(book);
     general(a);
     science(b);
