@@ -7,7 +7,7 @@
 using namespace std;
 
 int aidee;
-vector<string> book,borrowed,a,b,c,d,e,f,g,h,i,j,codes,oldbook ;//ตัวแปรสำคัญๆ
+vector<string> gbook,borrowed,a,b,c,d,e,f,g,h,i,j,codes,oldbook ;//ตัวแปรสำคัญๆ
 
 string toUpperStrX(string x){
     string y = x;
@@ -25,12 +25,12 @@ void old_book(vector<string> &oldbook){
     } 
 }
 
-void allbook(vector<string> &book){
+void allbook(vector<string> &gbook){
     ifstream source;
     source.open("All.txt");
     string text;
     while(getline(source,text)){
-        book.push_back(text);
+        gbook.push_back(text);
         
     } 
 }
@@ -132,20 +132,20 @@ void getAns(string &ans){
 }
 
 
-void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ดยืมหนังสือ ไว้ใส่ในปิกาจู
-    int N=book.size();
+void borrowBook(vector<string> &gbook,vector<string> &borrowed){ //โค้ดยืมหนังสือ ไว้ใส่ในปิกาจู
+    int N=gbook.size();
     bool k=false;
     string key,i;
     cout << "Please enter book's name: ";
     getline(cin,key);
     for(int i=0;i<N;i++){
-        if(toUpperStrX(key) == book[i]){
+        if(toUpperStrX(key) == gbook[i]){
             k =true;
             if(k == true){
                 cout << "............................................................................\n\n";
-                cout << " This is your " << book[i] << " Good Luck Have Fun.\n\n";
+                cout << " This is your " << gbook[i] << " Good Luck Have Fun.\n\n";
                 cout << "............................................................................\n";
-                borrowed.push_back(book[i]);
+                borrowed.push_back(gbook[i]);
                 
             }
         }
@@ -159,7 +159,7 @@ void borrowBook(vector<string> &book,vector<string> &borrowed){ //โค้ด�
 }   
 
 
-void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค้ดตัวหลัก
+void pikachu(vector<string> &gbook,vector<string> &borrowed,int &aidee){ //โค้ดตัวหลัก
     string ans;
     bool k=true;
     cout << "Please enter your id: ";
@@ -170,7 +170,7 @@ void pikachu(vector<string> &book,vector<string> &borrowed,int &aidee){ //โค
         cin.ignore();
         if(ans=="YES"){
             do{
-                borrowBook(book,borrowed);
+                borrowBook(gbook,borrowed);
                 cout << "Do you want to borrow any?(Key No to exit,Key any to continue): ";    
                 getAns(ans);
                 
@@ -269,44 +269,15 @@ void pass(vector<string> &borrowed,vector<string> &codes,vector<string> &oldbook
     } 
     dest.close();
 }
+ 
 
-void showBorrowed(){
-    ifstream source("pass.txt");
-    string text;
-    
-    do{
-        cout << "Enter key to see all borrowed books";
-        getAns(text);
-        if(text=="YES"){
-            cout << "\n............................................................................\n\n";
-            while(getline(source,text)){
-                cout << text << "\n";
-            }
-            cout << "\n............................................................................\n";
-            break;
-        }else if(text == "NO"){
-            cout << "............................................................................\n\n";
-            cout << "OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK OK\n\n";
-            cout << "............................................................................\n";
-            break;
-        }else{
-            cout << "............................................................................\n\n";
-            cout << "INVALID COMMANND\n\n";
-            cout << "............................................................................\n";
-
-        }
-    }while(true);
-}
-    
-    
-    
 
 
 
 void rent()
 {
     old_book(oldbook);
-    allbook(book);
+    allbook(gbook);
     general(a);
     science(b);
     math(c);
@@ -317,11 +288,9 @@ void rent()
     psycho(h);
     manage(i);
     techno(j);
-    pikachu(book,borrowed,aidee);
+    pikachu(gbook,borrowed,aidee);
    
-    codes = getCodes(book,borrowed,a,b,c,d,e,f,g,h,i,j);
+    codes = getCodes(gbook,borrowed,a,b,c,d,e,f,g,h,i,j);
     pass(borrowed,codes,oldbook,aidee);
-    showBorrowed();
-   
     
 }
