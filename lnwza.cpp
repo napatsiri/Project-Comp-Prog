@@ -176,8 +176,9 @@ void pikachu(vector<string> &gbook,vector<string> &borrowed,int &aidee){ //à¹‚à¸
                 
                 cin.ignore();
                 if(ans=="NO"){
-                    cout << "............................................................................\n\n";
-                    cout << "\t\tThis are "<< borrowed.size() << " books which you wanna borrowing\n";
+                    if(borrowed.size()==1){
+                        cout << "............................................................................\n\n";
+                    cout << "\t\tThis is "<< borrowed.size() << " books which you wanna borrowing\n";
                     for(int i=0;i<borrowed.size();i++){
                         cout << setw(39) << borrowed[i]  <<"\n";
                     }
@@ -187,6 +188,19 @@ void pikachu(vector<string> &gbook,vector<string> &borrowed,int &aidee){ //à¹‚à¸
                     cout << "............................................................................\n\n";
                     k=false;
                     break;
+                    }else{
+                        cout << "............................................................................\n\n";
+                        cout << "\t\tThis are "<< borrowed.size() << " books which you wanna borrowing\n";
+                        for(int i=0;i<borrowed.size();i++){
+                            cout << setw(39) << borrowed[i]  <<"\n";
+                        }
+                        cout << "                   Please return those book in due dates.\n";
+                        cout << "                       Thank you for using us.^_^\n";
+                        cout << "                                 Adios\n\n";            
+                        cout << "............................................................................\n\n";
+                        k=false;
+                        break;
+                    }
                 } 
             }while(true);
             break;
@@ -292,5 +306,5 @@ void rent()
    
     codes = getCodes(gbook,borrowed,a,b,c,d,e,f,g,h,i,j);
     pass(borrowed,codes,oldbook,aidee);
-    
+
 }
