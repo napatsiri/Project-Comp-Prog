@@ -24,7 +24,6 @@ void old_book(vector<string> &oldbook){
         
     } 
 }
-
 void allbook(vector<string> &gbook){
     ifstream source;
     source.open("All.txt");
@@ -192,7 +191,7 @@ void pikachu(vector<string> &gbook,vector<string> &borrowed,int &aidee){ //à¹‚à¸
                         cout << "............................................................................\n\n";
                         cout << "\t\tThis are "<< borrowed.size() << " books which you wanna borrowing\n";
                         for(int i=0;i<borrowed.size();i++){
-                            cout << setw(39) << borrowed[i]  <<"\n";
+                            cout << "                       " << borrowed[i]  <<"\n";
                         }
                         cout << "                   Please return those book in due dates.\n";
                         cout << "                       Thank you for using us.^_^\n";
@@ -284,10 +283,6 @@ void pass(vector<string> &borrowed,vector<string> &codes,vector<string> &oldbook
     dest.close();
 }
  
-
-
-
-
 int main()
 {
     old_book(oldbook);
