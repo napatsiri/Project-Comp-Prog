@@ -301,8 +301,6 @@ int main()
    
     codes = getCodes(gbook,borrowed,a,b,c,d,e,f,g,h,i,j);
     pass(borrowed,codes,oldbook,aidee);
-    
    
-    
     return 0;
 }

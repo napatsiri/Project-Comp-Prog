@@ -301,7 +301,4 @@ void rent()
    
     codes = getCodes(gbook,borrowed,a,b,c,d,e,f,g,h,i,j);
     pass(borrowed,codes,oldbook,aidee);
-    
-   
-
 }
