@@ -1,0 +1,283 @@
+#include<iostream> 
+#include<string> 
+#include<ctime> 
+#include<ctype.h> 
+#include<algorithm> 
+#include<sstream> 
+ 
+using namespace std; 
+//Global 
+int size = 5; 
+int n = 3; 
+int Lprice = 1200; 
+int Sprice = 700; 
+int maxPerRoom = 10; 
+//Struct 
+struct Detail{ // use for collect detail of each room type detail about preserved room 
+    string name; 
+    string studentID; 
+    string date; 
+ 
+    Detail():name("None"),studentID("None"),date("None") 
+    {} 
+}; 
+ 
+struct Room{ // use for collect room data and have array of Detail of each preserved 
+    Detail* table; 
+    char roomSize; 
+    int roomNo; 
+    int number; 
+    Room():table(nullptr),roomSize('S'),roomNo(0),number(0) 
+    {} 
+ 
+}; 
+//Prototype function 
+//main function 
+void program(); 
+//use function can use for some case 
+Room** createList(); 
+void createRoom(Room** listRoom); 
+void summary(Room** listRoom); 
+void printRoomDetail(Room* eachRoom); 
+void preserveRoom(Room** listRoom); 
+void showMenu(); 
+void priceSummary(Room** listRoom); 
+//Helper function can't use alone 
+Room* findRoom(Room** listRoom ,string date , char roomSize); 
+void addToList(Room* room , string date); 
+int eachRoomCount(Room* room); 
+bool dateValidation(string date); 
+ 
+void bookroom(){ 
+    program(); 
+} 
+ 
+void showMenu(){ 
+    cout<<"\nPlease input the following choice.\n"<<endl; 
+    cout<<" (1) Preserve room"<<endl; 
+    cout<<" (2) Show Summary"<<endl; 
+    cout<<" (3) Exit\n"<<endl; 
+    cout<<"Enter choice:"; 
+} 
+ 
+void program(){ 
+    Room** room = createList(); 
+    createRoom(room); 
+    cout<<"Welcome to Menu "<<endl; 
+    while(true){ 
+        showMenu(); 
+        string choice; 
+        cin >> choice; 
+        cout<<endl; 
+        if(choice.at(0) == '1') 
+            preserveRoom(room); 
+        else if(choice.at(0) == '2') 
+            summary(room); 
+        else if (choice.at(0) == '3'){ 
+            cout<<"/n Exit......"<<endl; 
+            break; 
+        } 
+        else 
+            cout<<"/n Invalid input return to Menu..../n"<<endl; 
+ 
+        cout<<"---------------------------------\n"<<endl; 
+ 
+    } 
+ 
+ 
+} 
+ 
+Room** createList(){ 
+    //array of pointer that point to struct 
+    Room **room = new Room*[::size]; 
+    createRoom(room); 
+    return room; 
+} 
+ 
+void createRoom(Room** listRoom){ 
+    for(int i = 0 ; i < ::size ; i++){ 
+        listRoom[i] = new Room(); 
+        listRoom[i]->roomNo +=i; 
+        listRoom[i]->table = new Detail[maxPerRoom]; 
+    } 
+    //n = number of big room 
+    for(int i = 0 ; i < n ; i++) 
+        listRoom[i]->roomSize = 'L'; 
+} 
+ 
+//Room():name("None"),studentID("None"),date("None"),assigned(false),roomSize('S') 
+ 
+void summary(Room** listRoom){ // Fixed 
+    cout<<"Summary: \n"<<endl; 
+    for(int i = 0 ; i < ::size ; i++){ 
+        printRoomDetail(listRoom[i]); 
+        cout<<endl; 
+    } 
+    priceSummary(listRoom); 
+ 
+} 
+ 
+void printRoomDetail(Room* eachRoom){ // Fixed 
+    cout<<"Room No: "<<eachRoom->roomNo<<"("<<eachRoom->roomSize<<")"<<endl; 
+    if (eachRoom->number == 0){ 
+        cout<<"  No preserved yet."<<endl; 
+        return; 
+    } 
+ 
+    cout<<"  List:"<<endl; 
+    for(int i = 0; i < eachRoom->number ; i++) 
+        cout<<"  Date: "<<eachRoom->table[i].date<<" Preserved by: "<<eachRoom->table[i].name<<" ID: "<<eachRoom->table[i].studentID<<endl; 
+ 
+} 
+ 
+void preserveRoom(Room** listRoom){ // No need to adjust 
+ 
+    cout<<"Input date (YYYY/MM/DD): "; 
+    string date , roomSizeString; 
+    cin >> date; 
+    cout<<"Input room size (S/L): "; 
+    cin >> roomSizeString; 
+    //Ignore case sensitive 
+    char roomSize = roomSizeString.at(0); 
+    if(roomSize == 's') 
+        roomSize = 'S'; 
+    if(roomSize == 'l') 
+        roomSize = 'L'; 
+    //Invalid input 
+    if(!dateValidation(date)){ 
+        cout<<"Invalid date !!!"<<endl; 
+        return; 
+    } 
+    if(roomSize != 'S' && roomSize != 'L'){ 
+        cout<<"Invalid room size!!!"<<endl; 
+        return; 
+    } 
+    Room* room = findRoom(listRoom , date , roomSize); 
+    //Can't found empty 
+    if(room == nullptr){ 
+        cout<<"There are no room left for this date ("<<date<<")"<<endl; 
+        return; 
+    } 
+    //Founded 
+    addToList(room , date); 
+} 
+bool dateValidation(string date){ // No need to adjust 
+    string tmp = date; 
+    //Not enought input 
+    if(date.size() != 10 || date.at(4) != '/' || date.at(7) != '/') 
+        return false; 
+    //check each are digit 
+    for(int i = 0 ; i < 10; i++){ 
+        //ignore '/' 
+        if(i == 4 || i == 7) 
+            continue; 
+        if(!isdigit(date.at(i))){ 
+            return false; 
+        } 
+    } 
+    //Check are date are not past 
+    //replace all / with ' ' 
+    replace(tmp.begin(),tmp.end(),'/',' '); 
+    //extract each value to int 
+    stringstream each(tmp); 
+    int checkyear,checkmonth,checkday; 
+    each >> checkyear; 
+    each >> checkmonth; 
+    each >> checkday; 
+ 
+    time_t t = time(0);//Get current time 
+    tm* current = localtime(&t); 
+    int year = current->tm_year+1900; 
+    int month = current->tm_mon+1; 
+    int day = current->tm_mday; 
+ 
+    //check total day 
+    if(year*360+month*12+day > checkyear*360+checkmonth*12+checkday) 
+        return false; 
+ 
+ 
+ 
+ 
+ 
+    return true; 
+} 
+void addToList(Room* room , string date){ // Fixed 
+    if(room->number >= maxPerRoom){ 
+        cout<<"Room reached limit can't add anymore!!"<<endl; 
+        return; 
+    } 
+ 
+    string studentID; 
+    string name; 
+    cout<<"Enter name: "; 
+    cin>>name; 
+    cout<<"Enter Student ID: "; 
+    cin>>studentID; 
+ 
+    //if there are empty 
+    if(room->number == 0){ 
+        room->table[0].name = name; 
+        room->table[0].studentID = studentID; 
+        room->table[0].date = date; 
+        //update size 
+        room->number++; 
+        return; 
+    } 
+ 
+    //already have element 
+    int nowSize = room->number; 
+        room->table[nowSize].name = name; 
+        room->table[nowSize].studentID = studentID; 
+        room->table[nowSize].date = date; 
+        //update size 
+        room->number++; 
+        return; 
+} 
+ 
+Room* findRoom(Room** listRoom ,string date , char roomSize){ // Fixed 
+    //Loop each room 
+    for(int i = 0 ; i < ::size ; i++){ 
+        //when size doesn't match skip 
+        if(listRoom[i]->roomSize != roomSize) 
+            continue; 
+ 
+        //Each inner loop will try compare date if not duplicate then it founded 
+        bool founded = true; 
+        Detail* now = nullptr; 
+ 
+        for(int j = 0; j < listRoom[i]->number ; j++){ 
+            if(listRoom[i]->table[j].date.compare(date) == 0) 
+                founded = false; 
+        } 
+ 
+        //if founded then return true cause we got room 
+        if(founded) 
+            return listRoom[i]; 
+    } 
+    //if we not founded then return 
+    return nullptr; 
+ 
+} 
+ 
+void priceSummary(Room** listRoom){// No need to adjust 
+    cout<<"Price summary:"<<endl; 
+    int sumCount = 0; 
+    int sumPrice = 0;
+    //i < n mean L size 
+    for(int i = 0 ; i < ::size ; i++){ 
+        int rate = Sprice; 
+        if(i < n) 
+            rate = Lprice; 
+        cout<<" Room No. "<<listRoom[i]->roomNo<<" Size ("<<listRoom[i]->roomSize<<") "<<"Preserved "<<eachRoomCount(listRoom[i])<<" Total price: "<<eachRoomCount(listRoom[i])*rate<<endl; 
+    sumCount += eachRoomCount(listRoom[i]); 
+    sumPrice += eachRoomCount(listRoom[i])*rate; 
+ 
+    } 
+    //Total price 
+    cout<<" Total preserve: "<<sumCount<<" Total price: "<<sumPrice<<endl; 
+} 
+ 
+int eachRoomCount(Room* room){ 
+ 
+    return room->number; 
+}
