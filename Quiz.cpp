@@ -256,6 +256,4 @@ void quiz(string user){
 		} 
 		
 	}
-	
-	return 0;
 }
