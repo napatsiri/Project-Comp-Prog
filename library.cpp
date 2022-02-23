@@ -22,9 +22,9 @@ int main(){
                 }else if(::choice == 2){
                     rent();
                 }else if(::choice == 3){
-                    quiz("student");
-                }else if(::choice == 4){
                     
+                }else if(::choice == 4){
+                    quiz("student");
                 }else if(::choice == 5){
                     break;
                 }else if(::choice == 6){
