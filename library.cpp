@@ -2,7 +2,7 @@
 #include "Quiz.cpp"
 #include "findbook.cpp"
 #include "lnwza.cpp"
-
+#include "bookroom.cpp"
 
 int main(){
     srand(time(0));
@@ -22,7 +22,7 @@ int main(){
                 }else if(::choice == 2){
                     rent();
                 }else if(::choice == 3){
-                    
+                    bookroom();
                 }else if(::choice == 4){
                     quiz("student");
                 }else if(::choice == 5){
