@@ -1,0 +1,19 @@
+q1 How many legs pikachu has. : a 4 : b 2 : c 3 : d 1 :A
+q2 How many legs dog has : a 4 : b 3 : c 2 : d 1 :A
+q3 Ni shi fan le ma : a ni hao ma le. : b wo shi fan le. : c ta men dou hen hao. : d papa mama. :B
+q4 Who is the Most handsome guy : a Gun : b Gun : c Gun : d Gun :C
+q5 Kai Jeaw or Kai Dao: a Kai gai : b Kai Palo : c Kai Jeaw : d Kai Dao :D
+q6 Who is Cancer : a Yasuo : b Yasuo : c Yasuo : d Yasuo :D
+q7 Who is the best teacher : a Aj Karn : b Aj Karn : c Aj Karn : d Aj Karn :C
+q8 Who is captain of straw hat pirates? : a Zolo : b Luffy : c Chopper : d Sanji :B
+q9 What's born first between Egg and Chicken: a Chicken : b Egg : c Omelete : d Omurice :A
+q10 Who is donut: a Anpanman : b Rengoku Kyojuro : c Itachi : d Sasuke :B
+q11 Chi sweet home : a Chi : b Chi : c Chi : d Chi :B
+q12 2+2=4-3=? : a 1 : b 2 : c 3 : d 4 :A
+q13 A B C D E F ? : a U : b G : c H : d I :A
+q14 Who is a God? : a Kira : b Uzui Tengen : c Gun Thirachai: d Pikachu :C
+q15 What is the best? : a AMD : b Intel : c Nvidia : d Apple :A
+q16 10203040 : a Nani : b Nani : c Nani : d Nani :C
+q17 Image it : a What : b What : c What : d What :D
+q18 10+10=? : a 10 : b 20  : c 30 : d 40 :B
+q19 5*100=? : a 500 : b 150 : c 10 : d 20 :A
