@@ -378,6 +378,7 @@ void find(){
 
             cout << ".................................\n";
             booktype();
+            nametype();
             list();
             exit();
             cin >> choice;

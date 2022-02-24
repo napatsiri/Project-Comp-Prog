@@ -220,7 +220,7 @@ void librarian(vector<string> &q,vector<string> &a,vector<string> &b,vector<stri
     }while(true);
 }
 
-int main(/*int argc,char *argv[]*/){
+void quiz(string user){
 	srand(time(0));
 	
 	vector<string> questions;
@@ -246,12 +246,8 @@ int main(/*int argc,char *argv[]*/){
 		qans.push_back(ans);
     }
 	
-	string tester="librarian";
-	/*cout<<"Who are you? : ";
-	cin>>tester;*/
-	
-	if(/*argv[1]=="student"*/tester=="student")		student(questions,choice_a,choice_b, choice_c, choice_d, qans);
-	else if(/*argv[1]=="librarian"*/tester=="librarian")	{
+	if(user=="student")		student(questions,choice_a,choice_b, choice_c, choice_d, qans);
+	else if(user=="librarian"){
 		librarian(questions,choice_a,choice_b, choice_c, choice_d, qans);
 		
 		ofstream write("Question.txt");;
@@ -260,6 +256,4 @@ int main(/*int argc,char *argv[]*/){
 		} 
 		
 	}
-	
-	return 0;
 }
